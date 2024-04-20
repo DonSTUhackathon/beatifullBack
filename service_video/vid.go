@@ -17,7 +17,7 @@ import (
 
 // nolint
 var (
-	addr     = flag.String("addr", ":8080", "http service address")
+	addr     = flag.String("addr", ":6789", "http service address")
 	upgrader = websocket.Upgrader{
 		CheckOrigin: func(r *http.Request) bool { return true },
 	}
@@ -55,14 +55,14 @@ func main() {
 	indexTemplate = template.Must(template.New("").Parse(string(indexHTML)))
 
 	// websocket handler
-	http.HandleFunc("/websocket", websocketHandler)
+	http.HandleFunc("/service/websocket", websocketHandler)
 
 	// index.html handler
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		if err := indexTemplate.Execute(w, "ws://"+r.Host+"/websocket"); err != nil {
-			log.Fatal(err)
-		}
-	})
+	// http.HandleFunc("/service", func(w http.ResponseWriter, r *http.Request) {
+	// 	if err := indexTemplate.Execute(w, "ws://"+r.Host+"/websocket"); err != nil {
+	// 		log.Fatal(err)
+	// 	}
+	// })
 
 	// request a keyframe every 3 seconds
 	go func() {

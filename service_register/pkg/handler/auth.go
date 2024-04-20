@@ -16,6 +16,11 @@ type Credentials struct {
 	Password string `json:"password"`
 }
 
+type Desc struct {
+	ID   string `json:"id"`
+	NewD string `json:"description"`
+}
+
 // ////////////////////////////////////////////////////////////////////////////
 func (h *Handler) RegisterUser(w http.ResponseWriter, r *http.Request) {
 
@@ -89,6 +94,41 @@ func (h *Handler) LoginUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(map[string]string{"redirect": fmt.Sprintf("/" + creds.Username)})
 
+}
+
+func (h *Handler) SetDescription(w http.ResponseWriter, r *http.Request) {
+	var dsc Desc
+	err := json.NewDecoder(r.Body).Decode(&dsc)
+	if err != nil {
+		http.Error(w, "Bad Request", http.StatusBadRequest)
+		return
+	}
+	if err != nil {
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
+	}
+	// Find the record in the database by ID
+	var desc Desc
+	err = h.DBInstance.Db.QueryRow("SELECT id, description FROM descriptions WHERE id=?", dsc.ID).Scan(&desc.ID)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			http.Error(w, "Not Found", http.StatusNotFound)
+		} else {
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		}
+		return
+	}
+
+	// Update the record in the database
+	_, err = h.DBInstance.Db.Exec("UPDATE descriptions SET description=? WHERE id=?", dsc.NewD, dsc.ID)
+	if err != nil {
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
+	}
+
+	// Return the updated record in the response
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(desc)
 }
 
 //////////////////////////////////////////////////////////////////////////////

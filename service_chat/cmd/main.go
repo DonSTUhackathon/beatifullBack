@@ -15,7 +15,7 @@ import (
 func main() {
 	r := chi.NewRouter()
 	r.Use(middleware.RedirectSlashes)
-	addr := flag.String("addr", ":8080", "http service address")
+	addr := flag.String("addr", ":11130", "http service address")
 	var h handler.Adapter
 	var err error
 	d, _ := os.ReadFile("sql_config.txt")
@@ -31,7 +31,7 @@ func main() {
 	}
 	defer h.Db.Close()
 
-	r.Route("/api", func(r chi.Router) {
+	r.Route("/service", func(r chi.Router) {
 		r.Get("/users", h.GetUsers)
 		r.Get("/chats", h.GetChats)
 		r.Route("/messages", func(r chi.Router) {

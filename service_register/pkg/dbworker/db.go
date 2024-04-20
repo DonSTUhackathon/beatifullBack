@@ -82,7 +82,7 @@ func (d Database) AddUser(rd RegisterRequest) error {
 	log.Print(user)
 	err = tx.QueryRow(`
 	INSERT INTO auth_user (password, last_login,is_superuser, username, first_name, last_name, email, is_staff, is_active,date_joined)
-	VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+	VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
 	RETURNING id
 `, rd.Password, time.Now(), false, rd.Username, rd.FirstName, rd.LastName, rd.Email, true, true, time.Now()).Scan(&user.ID)
 
@@ -98,9 +98,9 @@ func (d Database) AddUser(rd RegisterRequest) error {
 	log.Print(profile)
 
 	_, err = tx.Exec(`
-	INSERT INTO restauth_profile (id_id, description)
-	VALUES ($1, $2)
-`, user.ID, profile.Description)
+	INSERT INTO restauth_profile (id_id, description, image_path)
+	VALUES ($1, $2, $3)
+`, user.ID, profile.Description, "default.png")
 	if err != nil {
 		return fmt.Errorf("error inserting profile data: %s", err)
 	}

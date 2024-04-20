@@ -40,6 +40,7 @@ func (h *Handler) InitRoutes() *chi.Mux {
 		r.Post("/login", h.LoginUser)
 		r.Post("/registration", h.RegisterUser)
 		r.Put("/logout", h.LogoutUser)
+		r.Post("/setdesc", h.SetDescription)
 	})
 
 	/////////////////////////////////////////////////////////////////////////////////////////////
