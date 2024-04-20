@@ -13,15 +13,23 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+import restauth.views as vs 
 from django.contrib import admin
 from django.urls import path
-from restauth.views import GoogleLoginView, testView, UserRedirectView
 from django.urls import include, re_path
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register(r'users', vs.UserViews)
+router.register(r'profiles', vs.ProfileViews)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', testView),
-    path("auth/google/cb/", GoogleLoginView.as_view(), name="google_login"),
-    path("~redirect/", view=UserRedirectView.as_view(), name="redirect"),
+    path('', vs.testView),
+    path("auth/google/cb/", vs.GoogleLoginView.as_view(), name="google_login"),
+    path("~redirect/", view=vs.UserRedirectView.as_view(), name="redirect"),
 re_path(r'^accounts/', include('allauth.urls'), name='socialaccount_signup'),
+    path("match/", vs.MatchMe.as_view(), name="match_me" ),
+    path('api/', include(router.urls))
 ]
