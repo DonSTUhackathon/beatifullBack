@@ -55,7 +55,7 @@ type User struct {
 
 func DBConnect() (*Database, error) {
 	token, _ := os.ReadFile("config/dbconfig.txt")
-	db, err := sql.Open("mysql", string(token))
+	db, err := sql.Open("postgres", string(token))
 	if err != nil {
 		return nil, fmt.Errorf("error occured while opening the DB: %s", err)
 	}

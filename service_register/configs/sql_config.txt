@@ -1,0 +1,1 @@
+host=hackaton-ogetto.space port=4040 user=dbuser password=Pa$$w0rd dbname=oggetto_db sslmode=require
