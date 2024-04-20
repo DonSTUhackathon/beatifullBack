@@ -3,11 +3,13 @@ package main
 import (
 	"database/sql"
 	"flag"
+	"log"
+	"net/http"
+	"os"
+
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 	"github.com/orgs/DonSTUhackathon/beatifullBack/service_chat/handler"
-	"log"
-	"net/http"
 )
 
 func main() {
@@ -16,7 +18,8 @@ func main() {
 	addr := flag.String("addr", ":8080", "http service address")
 	var h handler.Adapter
 	var err error
-	h.Db, err = sql.Open("postgres", "user=admin password=4321 dbname=oggetto_db sslmode=disable")
+	d, _ := os.ReadFile("sql_config.txt")
+	h.Db, err = sql.Open("postgres", string(d))
 	if err != nil {
 		log.Fatal(err)
 	}

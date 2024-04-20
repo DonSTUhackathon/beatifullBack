@@ -1,0 +1,1 @@
+postgresql://dbuser:Pa$$w0rd@tcp(185.23.236.113):4040/oggetto_db
