@@ -22,6 +22,8 @@ from rest_framework import routers
 router = routers.DefaultRouter()
 router.register(r'users', vs.UserViews)
 router.register(r'profiles', vs.ProfileViews)
+router.register(r'tags', vs.TagViews)
+router.register(r'rooms', vs.RoomViews)
 
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -35,7 +37,7 @@ urlpatterns = [
     path('', vs.testView),
     path("auth/google/cb/", vs.GoogleLoginView.as_view(), name="google_login"),
     path("~redirect/", view=vs.UserRedirectView.as_view(), name="redirect"),
-re_path(r'^accounts/', include('allauth.urls'), name='socialaccount_signup'),
+re_path(r'^acounts/', include('allauth.urls'), name='socialaccount_signup'),
     path("match/", vs.MatchMe.as_view(), name="match_me" ),
     path('api/', include(router.urls)),
     path("api/token/", TokenObtainPairView.as_view()),

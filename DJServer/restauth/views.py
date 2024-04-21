@@ -24,6 +24,15 @@ from rest_framework import serializers, viewsets
 from dj_rest_auth import jwt_auth
 from restauth.models import *
 
+from rest_framework_simplejwt.tokens import RefreshToken
+
+def get_tokens_for_user(user):
+    refresh = RefreshToken.for_user(user)
+
+    return {
+        'refresh': str(refresh),
+        'access': str(refresh.access_token),
+    }
 
 def profile(user):
     return Profile.objects.filter(id=user)[0]
@@ -50,6 +59,8 @@ class GoogleLoginView(SocialLoginView):# Custom adapter is created because obsol
 
                 }
         r = requests.post(GOOGLE_REDIRECT_URL, data=payload, verify=False)
+        print(request.user)
+
         return HttpResponse(f"Code:{code}\nScope:{scope}, {r.text} ")
 
 
@@ -76,6 +87,19 @@ class UserViews(viewsets.ModelViewSet):
     #permission_classes = [IsAuthenticated]
     queryset = User.objects.all()
     serializer_class = UserS
+
+class TagViews(viewsets.ModelViewSet):
+    authentication_classes=[SessionAuthentication, BasicAuthentication]
+    #permission_classes = [IsAuthenticated]
+    queryset = Tag.objects.all()
+    serializer_class = TagS
+
+
+class RoomViews(viewsets.ModelViewSet):
+    authentication_classes=[SessionAuthentication, BasicAuthentication]
+    #permission_classes = [IsAdminUser]
+    queryset=Room.objects.all()
+    serializer_class = RoomS
 
 class MatchMe(APIView):
 
@@ -104,7 +128,8 @@ class MatchMe(APIView):
         # Вернуть Room
         context = {'request':request}
         new_room = Room(profile(request.user), chosed)
-        s = RoomS(new_room, context=context)
+        new_room.save()
+        s = ProfileS(choosed, context=context)
         print(f"Creating room wtih {request.user} {chosed}!")
         return Response(s.data)
 
