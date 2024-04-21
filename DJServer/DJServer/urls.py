@@ -23,6 +23,12 @@ router = routers.DefaultRouter()
 router.register(r'users', vs.UserViews)
 router.register(r'profiles', vs.ProfileViews)
 
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,5 +37,7 @@ urlpatterns = [
     path("~redirect/", view=vs.UserRedirectView.as_view(), name="redirect"),
 re_path(r'^accounts/', include('allauth.urls'), name='socialaccount_signup'),
     path("match/", vs.MatchMe.as_view(), name="match_me" ),
-    path('api/', include(router.urls))
+    path('api/', include(router.urls)),
+    path("api/token/", TokenObtainPairView.as_view()),
+    path("api/token/refresh", TokenRefreshView.as_view())
 ]

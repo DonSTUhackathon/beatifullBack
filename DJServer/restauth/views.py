@@ -49,7 +49,7 @@ class GoogleLoginView(SocialLoginView):# Custom adapter is created because obsol
                 "code":code,
 
                 }
-        r = requests.post("http://localhost:8080/auth/google/cb/", data=payload)
+        r = requests.post(GOOGLE_REDIRECT_URL, data=payload, verify=False)
         return HttpResponse(f"Code:{code}\nScope:{scope}, {r.text} ")
 
 
@@ -67,20 +67,20 @@ def testView(request):
 
 class ProfileViews(viewsets.ModelViewSet):
     authentication_classes=[SessionAuthentication, BasicAuthentication]
-    permission_classes = [IsAuthenticated]
+    #permission_classes = [IsAuthenticated]
     queryset = Profile.objects.all()
     serializer_class = ProfileS
 
 class UserViews(viewsets.ModelViewSet):
     authentication_classes=[SessionAuthentication, BasicAuthentication]
-    permission_classes = [IsAuthenticated]
+    #permission_classes = [IsAuthenticated]
     queryset = User.objects.all()
     serializer_class = UserS
 
 class MatchMe(APIView):
 
     authentication_classes=[SessionAuthentication, BasicAuthentication]
-    permission_classes = [IsAuthenticated]
+    #permission_classes = [IsAuthenticated]
     
     def get(self, request, format=None):
         print(request.user)

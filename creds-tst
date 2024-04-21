@@ -17,14 +17,13 @@ curl -H 'Content-Type: application/json' \
 http://127.0.0.1/?code=4%2F0AeaYSHBHmQ4Ezn0yL14xH48Jzyxff-SIN6wSDxVPj1aK-IMBG6-pXZLYqENz5c_BChVS6Q&scope=email+profile+openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email&authuser=0&prompt=consent
 
 
-https://accounts.google.com/o/oauth2/auth?redirect_uri=http://hackaton-ogetto.space/auth/google/cb/&prompt=consent&response_type=code&client_id=805206962011-2qeko9c52itrg7n28tteubqpsluntmjr.apps.googleusercontent.com&scope=openid%20email%20profile&access_type=offline
+https://accounts.google.com/o/oauth2/auth?redirect_uri=https://hackaton-ogetto.space/auth/google/cb/&prompt=consent&response_type=code&client_id=805206962011-jshq1eno4takehaaurr499t1un9pcvft.apps.googleusercontent.com&scope=openid%20email%20profile&access_type=offline
 
 https://accounts.google.com/o/oauth2/auth?redirect_uri=http://localhost:8080/auth/google/cb/&prompt=consent&response_type=code&client_id=805206962011-2qeko9c52itrg7n28tteubqpsluntmjr.apps.googleusercontent.com&scope=openid%20email%20profile&access_type=offline
 
 curl -d "client_id=805206962011-2qeko9c52itrg7n28tteubqpsluntmjr.apps.googleusercontent.com&client_secret=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&code=4/0AeaYSHCI2ytaYz4bglwWAnq1UqD37y0Pnozuo5JEB0kublF_y5v_--vkpIfMQSfwNqQkrg&redirect_uri=http://hackaton-ogetto.space/auth/google/cb/&grant_type=authorization_code" \
     https://oauth2.googleapis.com/token
 
-805206962011-2qeko9c52itrg7n28tteubqpsluntmjr.apps.googleusercontent.com
 
 
-
+805206962011-jshq1eno4takehaaurr499t1un9pcvft.apps.googleusercontent.com

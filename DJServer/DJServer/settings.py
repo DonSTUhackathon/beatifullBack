@@ -1,3 +1,4 @@
+
 """
 Django settings for DJServer project.
 
@@ -11,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -48,7 +50,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'dj_rest_auth',
-#    'djangoviz',
+    #'djangoviz',
     'rest_auth',
 
 
@@ -142,15 +144,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
+STATIC_ROOT=BASE_DIR / 'static_root'
 STATIC_URL = 'static/'
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ACCOUNT_EMAIL_VERIFICATION = "none"
-GOOGLE_REDIRECT_URL="http://hackaton-ogetto/auth/google/cb/"
+GOOGLE_REDIRECT_URL="https://hackaton-ogetto.space/auth/google/cb/"
  
 
 REST_AUTH = { 'USE_JWT': True,
@@ -166,5 +168,7 @@ REST_FRAMEWORK = {
 
 REST_USE_JWT = True
 
-JWT_AUTH_COOKIE = 'my-app-auth'
+CSRF_TRUSTED_ORIGINS=["https://hackaton-ogetto.space"]
+
+
 
