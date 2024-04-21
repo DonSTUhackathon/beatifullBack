@@ -7,5 +7,5 @@
 .json-view ul li{position:relative}
 .json-view .comments,.json-view .dots{display:none;-moz-user-select:none;-ms-user-select:none;-khtml-user-select:none;-webkit-user-select:none;-o-user-select:none;user-select:none}
 .json-view .comments{padding-left:.8em;font-style:italic;color:#888}
-.json-view .bool,.json-view .null,.json-view .num,.json-view .undef{font-weight:700;color:#1A01CC}
+.json-view .bool,.json-view .null,.json-view .num,.json-view .undef{font-weight:700;color:#e1ef20}
 .json-view .str{color:#800}

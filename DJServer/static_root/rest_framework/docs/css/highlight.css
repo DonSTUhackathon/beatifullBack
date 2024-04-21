@@ -69,7 +69,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 .hljs-tag .hljs-title,
 .hljs-rule .hljs-property,
 .django .hljs-tag .hljs-keyword {
-  color: #000080;
+  color: #FFED00;
   font-weight: normal;
 }
 
@@ -77,7 +77,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 .hljs-variable,
 .lisp .hljs-body,
 .hljs-name {
-  color: #008080;
+  color: #fd0;
 }
 
 .hljs-regexp {
@@ -95,7 +95,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 }
 
 .hljs-built_in {
-  color: #0086b3;
+  color: #222;
 }
 
 .hljs-preprocessor,
@@ -117,7 +117,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 }
 
 .diff .hljs-change {
-  background: #0086b3;
+  background: #ecb300;
 }
 
 .hljs-chunk {
